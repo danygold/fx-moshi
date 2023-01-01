@@ -1,6 +1,7 @@
 # FX Moshi
 
 ![build](https://github.com/danygold/fx-moshi/actions/workflows/build.yml/badge.svg)
+[![codecov](https://codecov.io/gh/danygold/fx-moshi/branch/master/graph/badge.svg)](https://codecov.io/gh/danygold/fx-moshi)
 ![release](https://img.shields.io/badge/version-1.0.0-yellow)
 ![license](https://img.shields.io/badge/License-Apache_2.0-blue)
 
