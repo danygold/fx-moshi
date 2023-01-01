@@ -17,13 +17,14 @@ plugins {
     id("java-library")
     id("org.openjfx.javafxplugin") version "0.0.13"
     id("maven-publish")
+    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
     jacoco
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    checkstyle
 }
 
 group = "io.github.danygold"
-version = "1.0.0-SNAPSHOT"
+version = "1.0.0"
 description = "FX Moshi, a set of Moshi adapters to support serialization/deserialization of JavaFX properties."
 
 java {
