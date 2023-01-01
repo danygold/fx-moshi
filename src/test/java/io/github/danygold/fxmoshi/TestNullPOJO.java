@@ -16,6 +16,9 @@
 package io.github.danygold.fxmoshi;
 
 import javafx.beans.property.*;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.collections.ObservableSet;
 
 import java.time.LocalDate;
 
@@ -29,6 +32,9 @@ public class TestNullPOJO {
     private LongProperty longProperty;
     private ObjectProperty<LocalDate> objectProperty;
     private StringProperty stringProperty;
+    private ObservableList<String> observableList;
+    private ObservableSet<String> observableSet;
+    private ObservableMap<String, String> observableMap;
 
     public boolean isBooleanProperty() {
         return booleanProperty.get();
@@ -112,5 +118,29 @@ public class TestNullPOJO {
 
     public void setStringProperty(String stringProperty) {
         this.stringProperty.set(stringProperty);
+    }
+
+    public ObservableList<String> getObservableList() {
+        return observableList;
+    }
+
+    public void setObservableList(ObservableList<String> observableList) {
+        this.observableList = observableList;
+    }
+
+    public ObservableSet<String> getObservableSet() {
+        return observableSet;
+    }
+
+    public void setObservableSet(ObservableSet<String> observableSet) {
+        this.observableSet = observableSet;
+    }
+
+    public ObservableMap<String, String> getObservableMap() {
+        return observableMap;
+    }
+
+    public void setObservableMap(ObservableMap<String, String> observableMap) {
+        this.observableMap = observableMap;
     }
 }

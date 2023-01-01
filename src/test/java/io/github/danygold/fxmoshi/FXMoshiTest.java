@@ -100,7 +100,8 @@ class FXMoshiTest {
         TestNullPOJO nullPOJO = FXMoshi.createBuilder().add(new LocalDateAdapter()).build().adapter(TestNullPOJO.class)
                 .fromJson("{\"booleanProperty\": null,\"doubleProperty\": null,\"floatProperty\": null," +
                         "\"integerProperty\": null,\"longProperty\": null,\"objectProperty\": null," +
-                        "\"stringProperty\": null}");
+                        "\"stringProperty\": null,\"observableList\": null,\"observableSet\": null," +
+                        "\"observableMap\": null}");
         assert nullPOJO != null;
         Assertions.assertEquals(new SimpleBooleanProperty().get(), nullPOJO.booleanPropertyProperty().get());
         Assertions.assertEquals(new SimpleDoubleProperty().get(), nullPOJO.doublePropertyProperty().get());
@@ -109,6 +110,9 @@ class FXMoshiTest {
         Assertions.assertEquals(new SimpleLongProperty().get(), nullPOJO.longPropertyProperty().get());
         Assertions.assertEquals(new SimpleObjectProperty<LocalDate>().get(), nullPOJO.objectPropertyProperty().get());
         Assertions.assertEquals(new SimpleStringProperty().get(), nullPOJO.stringPropertyProperty().get());
+        Assertions.assertEquals(FXCollections.observableArrayList(), nullPOJO.getObservableList());
+        Assertions.assertEquals(FXCollections.observableSet(), nullPOJO.getObservableSet());
+        Assertions.assertEquals(FXCollections.observableHashMap(), nullPOJO.getObservableMap());
 
         TestNullPOJO nullPOJO1 = new TestNullPOJO();
         Assertions.assertEquals("{}", FXMoshi.createBuilder().add(new LocalDateAdapter()).build().adapter(TestNullPOJO.class).toJson(nullPOJO1));
