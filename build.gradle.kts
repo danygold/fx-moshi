@@ -96,6 +96,14 @@ publishing {
                         url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
                     }
                 }
+                developers {
+                    developer {
+                        id.set("daniele-vianini")
+                        name.set("Daniele Vianini")
+                        email.set("danidani95dani@gmail.com")
+                        url.set("https://github.com/danygold")
+                    }
+                }
                 scm {
                     connection.set("scm:git:https://github.com/danygold/fx-moshi.git")
                     developerConnection.set("scm:git:git@github.com:danygold/fx-moshi.git")
