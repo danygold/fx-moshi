@@ -16,6 +16,9 @@
 plugins {
     id("java-library")
     id("org.openjfx.javafxplugin") version "0.0.13"
+    id("maven-publish")
+    signing
+    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
 group = "io.github.danygold"
@@ -54,4 +57,43 @@ tasks.withType<JavaCompile> {
 tasks.getByName<Test>("test") {
     defaultCharacterEncoding = "UTF-8"
     useJUnitPlatform()
+}
+
+nexusPublishing {
+    packageGroup.set("io.github.danygold")
+    repositories {
+        sonatype()
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+
+            pom {
+                name.set(project.name)
+                description.set(project.description)
+                url.set("https://github.com/danygold/fx-moshi")
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:https://github.com/danygold/fx-moshi.git")
+                    developerConnection.set("scm:git:git@github.com:danygold/fx-moshi.git")
+                    url.set("https://github.com/danygold/fx-moshi")
+                }
+            }
+        }
+    }
+}
+
+signing {
+    val signingKey: String? by project
+    val signingPassword: String? by project
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign(publishing.publications["maven"])
 }
