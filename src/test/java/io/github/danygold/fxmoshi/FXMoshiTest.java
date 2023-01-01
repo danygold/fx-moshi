@@ -95,6 +95,24 @@ class FXMoshiTest {
         Assertions.assertEquals(testSpecializedPOJO, testSpecializedPOJO1);
     }
 
+    @Test
+    void nullProperties() throws IOException {
+        TestNullPOJO nullPOJO = FXMoshi.createBuilder().add(new LocalDateAdapter()).build().adapter(TestNullPOJO.class)
+                .fromJson("{\"booleanProperty\": null,\"doubleProperty\": null,\"floatProperty\": null," +
+                        "\"integerProperty\": null,\"longProperty\": null,\"objectProperty\": null," +
+                        "\"stringProperty\": null}");
+        assert nullPOJO != null;
+        Assertions.assertEquals(new SimpleBooleanProperty().get(), nullPOJO.booleanPropertyProperty().get());
+        Assertions.assertEquals(new SimpleDoubleProperty().get(), nullPOJO.doublePropertyProperty().get());
+        Assertions.assertEquals(new SimpleFloatProperty().get(), nullPOJO.floatPropertyProperty().get());
+        Assertions.assertEquals(new SimpleIntegerProperty().get(), nullPOJO.integerPropertyProperty().get());
+        Assertions.assertEquals(new SimpleLongProperty().get(), nullPOJO.longPropertyProperty().get());
+        Assertions.assertEquals(new SimpleObjectProperty<LocalDate>().get(), nullPOJO.objectPropertyProperty().get());
+        Assertions.assertEquals(new SimpleStringProperty().get(), nullPOJO.stringPropertyProperty().get());
+
+        TestNullPOJO nullPOJO1 = new TestNullPOJO();
+        Assertions.assertEquals("{}", FXMoshi.createBuilder().add(new LocalDateAdapter()).build().adapter(TestNullPOJO.class).toJson(nullPOJO1));
+    }
 
     public static <T> T deepCopy(@NotNull Moshi moshi, T o, Class<T> clazz) {
         try {
@@ -119,5 +137,4 @@ class FXMoshiTest {
             return path.toString();
         }
     }
-
 }

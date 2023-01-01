@@ -52,10 +52,15 @@ public abstract class PrimitivePropertyTypeAdapter<I, P extends Property<?>> ext
      */
     @Override
     public P fromJson(JsonReader reader) throws IOException {
-        I i = delegate.fromJson(reader);
-        if (i != null) {
-            return wrapPrimitiveValue(i);
+        if (reader.peek() != JsonReader.Token.NULL) {
+            I i = delegate.fromJson(reader);
+            if (i != null) {
+                return wrapPrimitiveValue(i);
+            } else {
+                return createDefaultProperty();
+            }
         } else {
+            reader.nextNull();
             return createDefaultProperty();
         }
     }
