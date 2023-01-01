@@ -1,4 +1,4 @@
-module fx.moshi.main {
+module io.github.danygold.fx.moshi {
     requires moshi;
     requires transitive javafx.base;
     requires static org.jetbrains.annotations;
