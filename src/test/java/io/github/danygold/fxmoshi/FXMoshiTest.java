@@ -83,6 +83,18 @@ class FXMoshiTest {
         Assertions.assertEquals(testMixedPOJO, testMixedPOJO1);
     }
 
+    @Test
+    void specializedProperties() {
+        TestSpecializedPOJO testSpecializedPOJO = new TestSpecializedPOJO();
+        testSpecializedPOJO.setListProperty(FXCollections.observableList(List.of("list1")));
+        testSpecializedPOJO.setSetProperty(FXCollections.observableSet(Set.of("set1")));
+        testSpecializedPOJO.setMapProperty(FXCollections.observableMap(Map.of("key1", "value1")));
+        testSpecializedPOJO.setObjectProperty("string");
+
+        TestSpecializedPOJO testSpecializedPOJO1 = deepCopy(FXMoshi.build(), testSpecializedPOJO, TestSpecializedPOJO.class);
+        Assertions.assertEquals(testSpecializedPOJO, testSpecializedPOJO1);
+    }
+
 
     public static <T> T deepCopy(@NotNull Moshi moshi, T o, Class<T> clazz) {
         try {
