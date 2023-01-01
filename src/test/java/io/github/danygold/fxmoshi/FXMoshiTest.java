@@ -19,8 +19,12 @@ import com.squareup.moshi.FromJson;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.ToJson;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -116,6 +120,8 @@ class FXMoshiTest {
 
         TestNullPOJO nullPOJO1 = new TestNullPOJO();
         Assertions.assertEquals("{}", FXMoshi.createBuilder().add(new LocalDateAdapter()).build().adapter(TestNullPOJO.class).toJson(nullPOJO1));
+
+        Assertions.assertEquals("{}", FXMoshi.createBuilder().add(new LocalDateAdapter()).build().adapter(TestClass.class).toJson(new TestClass()));
     }
 
     public static <T> T deepCopy(@NotNull Moshi moshi, T o, Class<T> clazz) {
@@ -131,14 +137,89 @@ class FXMoshiTest {
     private static class LocalDateAdapter {
 
         @FromJson
-        public LocalDate from(String pathString) {
-            return LocalDate.parse(pathString);
+        public LocalDate from(String value) {
+            return LocalDate.parse(value);
         }
 
 
+        @Contract(pure = true)
         @ToJson
-        public String to(@NotNull LocalDate path) {
-            return path.toString();
+        public @NotNull String to(@NotNull LocalDate localDate) {
+            return localDate.toString();
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private static class TestClass {
+        private CustomProperty customProperty;
+    }
+
+    @SuppressWarnings("unused")
+    private static class CustomProperty implements Property<String> {
+
+        @Override
+        public void bind(ObservableValue<? extends String> observable) {
+
+        }
+
+        @Override
+        public void unbind() {
+
+        }
+
+        @Override
+        public boolean isBound() {
+            return false;
+        }
+
+        @Override
+        public void bindBidirectional(Property<String> other) {
+
+        }
+
+        @Override
+        public void unbindBidirectional(Property<String> other) {
+
+        }
+
+        @Override
+        public Object getBean() {
+            return null;
+        }
+
+        @Override
+        public String getName() {
+            return null;
+        }
+
+        @Override
+        public void addListener(ChangeListener<? super String> listener) {
+
+        }
+
+        @Override
+        public void removeListener(ChangeListener<? super String> listener) {
+
+        }
+
+        @Override
+        public String getValue() {
+            return null;
+        }
+
+        @Override
+        public void setValue(String value) {
+
+        }
+
+        @Override
+        public void addListener(InvalidationListener listener) {
+
+        }
+
+        @Override
+        public void removeListener(InvalidationListener listener) {
+
         }
     }
 }

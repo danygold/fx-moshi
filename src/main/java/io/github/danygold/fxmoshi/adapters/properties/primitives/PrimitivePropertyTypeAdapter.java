@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Abstract JsonAdapter useful for JavaFX primitives {@link Property}.
@@ -54,11 +55,8 @@ public abstract class PrimitivePropertyTypeAdapter<I, P extends Property<?>> ext
     public P fromJson(JsonReader reader) throws IOException {
         if (reader.peek() != JsonReader.Token.NULL) {
             I i = delegate.fromJson(reader);
-            if (i != null) {
-                return wrapPrimitiveValue(i);
-            } else {
-                return createDefaultProperty();
-            }
+            // This adapter works only on primitives type
+            return wrapPrimitiveValue(Objects.requireNonNull(i));
         } else {
             reader.nextNull();
             return createDefaultProperty();
