@@ -18,6 +18,7 @@ plugins {
     id("org.openjfx.javafxplugin") version "0.0.13"
     id("maven-publish")
     signing
+    jacoco
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
@@ -57,6 +58,17 @@ tasks.withType<JavaCompile> {
 tasks.getByName<Test>("test") {
     defaultCharacterEncoding = "UTF-8"
     useJUnitPlatform()
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
+
+tasks.check {
+    dependsOn(tasks.jacocoTestReport)
 }
 
 nexusPublishing {
