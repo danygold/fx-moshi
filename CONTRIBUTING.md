@@ -36,7 +36,7 @@ dependency management are handled by [Gradle](https://gradle.org/).
     ├── .github                 # GitLab default configuration
     ├── src                     # Source files
     ├── ...
-    └── build.gradle
+    └── build.gradle.kts
 
 ### Source files
 

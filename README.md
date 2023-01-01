@@ -54,7 +54,7 @@ chosen testing platform is [JUnit](https://junit.org/junit5/). Implemented test 
     ├── .github                 # GitLab default configuration
     ├── src                     # Source files
     ├── ...
-    └── build.gradle
+    └── build.gradle.kts
 
 ## Source files
 
