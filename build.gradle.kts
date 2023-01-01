@@ -35,7 +35,7 @@ java {
 
 javafx {
     version = "11"
-    modules = listOf("javafx.base", "javafx.graphics")
+    modules = listOf("javafx.base")
 }
 
 repositories {
