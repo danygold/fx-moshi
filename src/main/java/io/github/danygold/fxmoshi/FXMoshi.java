@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-package com.github.danygold.fxmoshi;
+package io.github.danygold.fxmoshi;
 
-import com.github.danygold.fxmoshi.factories.FXObservableFactory;
-import com.github.danygold.fxmoshi.factories.FXPropertyFactory;
 import com.squareup.moshi.Moshi;
+import io.github.danygold.fxmoshi.factories.FXObservableFactory;
+import io.github.danygold.fxmoshi.factories.FXPropertyFactory;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

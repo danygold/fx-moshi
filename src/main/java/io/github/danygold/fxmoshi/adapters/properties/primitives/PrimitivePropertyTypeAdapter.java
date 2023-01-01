@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.github.danygold.fxmoshi.adapters.properties.primitives;
+package io.github.danygold.fxmoshi.adapters.properties.primitives;
 
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.JsonReader;

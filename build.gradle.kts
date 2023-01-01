@@ -18,7 +18,7 @@ plugins {
     id("org.openjfx.javafxplugin") version "0.0.13"
 }
 
-group = "com.github.danygold"
+group = "io.github.danygold"
 version = "1.0.0-SNAPSHOT"
 description = "FX Moshi, a set of Moshi adapters to support serialization/deserialization of JavaFX properties."
 

@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-package com.github.danygold.fxmoshi.factories;
+package io.github.danygold.fxmoshi.factories;
 
-import com.github.danygold.fxmoshi.adapters.observable.ObservableListAdapter;
-import com.github.danygold.fxmoshi.adapters.observable.ObservableMapAdapter;
-import com.github.danygold.fxmoshi.adapters.observable.ObservableSetAdapter;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
 import com.squareup.moshi.internal.Util;
+import io.github.danygold.fxmoshi.adapters.observable.ObservableListAdapter;
+import io.github.danygold.fxmoshi.adapters.observable.ObservableMapAdapter;
+import io.github.danygold.fxmoshi.adapters.observable.ObservableSetAdapter;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.collections.ObservableSet;

@@ -13,34 +13,33 @@
  * limitations under the License.
  */
 
-package com.github.danygold.fxmoshi.adapters.observable;
+package io.github.danygold.fxmoshi.adapters.observable;
 
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.JsonReader;
 import com.squareup.moshi.JsonWriter;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableSet;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * JsonAdapter for JavaFX {@link ObservableSet}.
+ * JsonAdapter for JavaFX {@link ObservableList}.
  * <p>
  * Suppose that the {@code Cars} class is defined like this:
  * <pre>
  * {@code
  *     class Cars {
- *         private final ObservableSet<String> names;
+ *         private final ObservableList<String> names;
  *
- *         Cars(Set<String> names) {
- *             this.names = FXCollections.observableSet(names);
+ *         Cars(List<String> names) {
+ *             this.names = FXCollections.observableList(names);
  *         }
  *     }
  * }</pre>
- * Here is how {@code new Cars(Set.of("Ferrari", "Lamborghini", "Tesla"))} is serialized:
+ * Here is how {@code new Cars(List.of("Ferrari", "Lamborghini", "Tesla"))} is serialized:
  * <pre>
  * {
  *   "names": [
@@ -51,18 +50,18 @@ import java.util.Set;
  * }
  * </pre>
  *
- * @param <T> the type of element in this set
+ * @param <T> the type of element in this list
  */
-public class ObservableSetAdapter<T> extends JsonAdapter<ObservableSet<T>> {
+public class ObservableListAdapter<T> extends JsonAdapter<ObservableList<T>> {
 
-    private final JsonAdapter<Set<T>> delegate;
+    private final JsonAdapter<List<T>> delegate;
 
     /**
-     * Instance a new {@code ObservableSetAdapter}
+     * Instance a new {@code ObservableListAdapter}
      *
      * @param delegate adapter to use for serialize/deserialize
      */
-    public ObservableSetAdapter(JsonAdapter<Set<T>> delegate) {
+    public ObservableListAdapter(JsonAdapter<List<T>> delegate) {
         this.delegate = delegate;
     }
 
@@ -72,10 +71,14 @@ public class ObservableSetAdapter<T> extends JsonAdapter<ObservableSet<T>> {
      * @throws IOException if an I/O errors has occurred in deserialize
      */
     @Override
-    public ObservableSet<T> fromJson(JsonReader reader) throws IOException {
-        Set<T> objects = delegate.fromJson(reader);
+    public ObservableList<T> fromJson(JsonReader reader) throws IOException {
+        List<T> objects = delegate.fromJson(reader);
 
-        return FXCollections.observableSet(Objects.requireNonNullElseGet(objects, HashSet::new));
+        if (objects != null) {
+            return FXCollections.observableList(objects);
+        } else {
+            return FXCollections.observableArrayList();
+        }
     }
 
     /**
@@ -86,11 +89,12 @@ public class ObservableSetAdapter<T> extends JsonAdapter<ObservableSet<T>> {
      * @throws IOException if an I/O errors has occurred in serialize
      */
     @Override
-    public void toJson(JsonWriter writer, ObservableSet<T> value) throws IOException {
+    public void toJson(JsonWriter writer, ObservableList<T> value) throws IOException {
         if (value != null) {
-            delegate.toJson(writer, new HashSet<>(value));
+            delegate.toJson(writer, new ArrayList<>(value));
         } else {
             writer.nullValue();
         }
     }
+
 }

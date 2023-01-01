@@ -13,55 +13,56 @@
  * limitations under the License.
  */
 
-package com.github.danygold.fxmoshi.adapters.observable;
+package io.github.danygold.fxmoshi.adapters.observable;
 
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.JsonReader;
 import com.squareup.moshi.JsonWriter;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableMap;
+import javafx.collections.ObservableSet;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
- * JsonAdapter for JavaFX {@link ObservableMap}.
+ * JsonAdapter for JavaFX {@link ObservableSet}.
  * <p>
  * Suppose that the {@code Cars} class is defined like this:
  * <pre>
  * {@code
  *     class Cars {
- *         private final ObservableMap<String, Integer> modelsYear;
+ *         private final ObservableSet<String> names;
  *
- *         Cars(Map<String, Integer> modelsYear) {
- *             this.modelsYear = FXCollections.observableMap(modelsYear);
+ *         Cars(Set<String> names) {
+ *             this.names = FXCollections.observableSet(names);
  *         }
  *     }
  * }</pre>
- * Here is how {@code new Cars(Map.of("Model S", 2020, "Model X", 2022))} is serialized:
+ * Here is how {@code new Cars(Set.of("Ferrari", "Lamborghini", "Tesla"))} is serialized:
  * <pre>
  * {
- *   "modelsYear": {
- *     "Model S": 2020,
- *     "Model X": 2022
- *   }
+ *   "names": [
+ *     "Ferrari",
+ *     "Lamborghini",
+ *     "Tesla"
+ *   ]
  * }
  * </pre>
  *
- * @param <K> the type of keys maintained by this map
- * @param <V> the type of mapped values
+ * @param <T> the type of element in this set
  */
-public class ObservableMapAdapter<K, V> extends JsonAdapter<ObservableMap<K, V>> {
+public class ObservableSetAdapter<T> extends JsonAdapter<ObservableSet<T>> {
 
-    private final JsonAdapter<Map<K, V>> delegate;
+    private final JsonAdapter<Set<T>> delegate;
 
     /**
-     * Instance a new {@code ObservableMapAdapter}
+     * Instance a new {@code ObservableSetAdapter}
      *
      * @param delegate adapter to use for serialize/deserialize
      */
-    public ObservableMapAdapter(JsonAdapter<Map<K, V>> delegate) {
+    public ObservableSetAdapter(JsonAdapter<Set<T>> delegate) {
         this.delegate = delegate;
     }
 
@@ -71,14 +72,10 @@ public class ObservableMapAdapter<K, V> extends JsonAdapter<ObservableMap<K, V>>
      * @throws IOException if an I/O errors has occurred in deserialize
      */
     @Override
-    public ObservableMap<K, V> fromJson(JsonReader reader) throws IOException {
-        Map<K, V> objects = delegate.fromJson(reader);
+    public ObservableSet<T> fromJson(JsonReader reader) throws IOException {
+        Set<T> objects = delegate.fromJson(reader);
 
-        if (objects != null) {
-            return FXCollections.observableMap(objects);
-        } else {
-            return FXCollections.observableHashMap();
-        }
+        return FXCollections.observableSet(Objects.requireNonNullElseGet(objects, HashSet::new));
     }
 
     /**
@@ -89,9 +86,9 @@ public class ObservableMapAdapter<K, V> extends JsonAdapter<ObservableMap<K, V>>
      * @throws IOException if an I/O errors has occurred in serialize
      */
     @Override
-    public void toJson(JsonWriter writer, ObservableMap<K, V> value) throws IOException {
+    public void toJson(JsonWriter writer, ObservableSet<T> value) throws IOException {
         if (value != null) {
-            delegate.toJson(writer, new HashMap<>(value));
+            delegate.toJson(writer, new HashSet<>(value));
         } else {
             writer.nullValue();
         }

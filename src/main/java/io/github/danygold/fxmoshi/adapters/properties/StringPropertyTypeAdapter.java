@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.github.danygold.fxmoshi.adapters.properties;
+package io.github.danygold.fxmoshi.adapters.properties;
 
 import com.squareup.moshi.JsonAdapter;
 import javafx.beans.property.SimpleStringProperty;
