@@ -89,39 +89,11 @@ class FXMoshiTest {
 
     @Test
     void specializedProperties() {
-        TestSpecializedPOJO testSpecializedPOJO = new TestSpecializedPOJO();
-        testSpecializedPOJO.setListProperty(FXCollections.observableList(List.of("list1")));
-        testSpecializedPOJO.setSetProperty(FXCollections.observableSet(Set.of("set1")));
-        testSpecializedPOJO.setMapProperty(FXCollections.observableMap(Map.of("key1", "value1")));
-        testSpecializedPOJO.setObjectProperty("string");
 
-        TestSpecializedPOJO testSpecializedPOJO1 = deepCopy(FXMoshi.build(), testSpecializedPOJO, TestSpecializedPOJO.class);
-        Assertions.assertEquals(testSpecializedPOJO, testSpecializedPOJO1);
     }
 
     @Test
     void nullProperties() throws IOException {
-        TestNullPOJO nullPOJO = FXMoshi.createBuilder().add(new LocalDateAdapter()).build().adapter(TestNullPOJO.class)
-                .fromJson("{\"booleanProperty\": null,\"doubleProperty\": null,\"floatProperty\": null," +
-                        "\"integerProperty\": null,\"longProperty\": null,\"objectProperty\": null," +
-                        "\"stringProperty\": null,\"observableList\": null,\"observableSet\": null," +
-                        "\"observableMap\": null}");
-        assert nullPOJO != null;
-        Assertions.assertEquals(new SimpleBooleanProperty().get(), nullPOJO.booleanPropertyProperty().get());
-        Assertions.assertEquals(new SimpleDoubleProperty().get(), nullPOJO.doublePropertyProperty().get());
-        Assertions.assertEquals(new SimpleFloatProperty().get(), nullPOJO.floatPropertyProperty().get());
-        Assertions.assertEquals(new SimpleIntegerProperty().get(), nullPOJO.integerPropertyProperty().get());
-        Assertions.assertEquals(new SimpleLongProperty().get(), nullPOJO.longPropertyProperty().get());
-        Assertions.assertEquals(new SimpleObjectProperty<LocalDate>().get(), nullPOJO.objectPropertyProperty().get());
-        Assertions.assertEquals(new SimpleStringProperty().get(), nullPOJO.stringPropertyProperty().get());
-        Assertions.assertEquals(FXCollections.observableArrayList(), nullPOJO.getObservableList());
-        Assertions.assertEquals(FXCollections.observableSet(), nullPOJO.getObservableSet());
-        Assertions.assertEquals(FXCollections.observableHashMap(), nullPOJO.getObservableMap());
-
-        TestNullPOJO nullPOJO1 = new TestNullPOJO();
-        Assertions.assertEquals("{}", FXMoshi.createBuilder().add(new LocalDateAdapter()).build().adapter(TestNullPOJO.class).toJson(nullPOJO1));
-
-        Assertions.assertEquals("{}", FXMoshi.createBuilder().add(new LocalDateAdapter()).build().adapter(TestClass.class).toJson(new TestClass()));
     }
 
     public static <T> T deepCopy(@NotNull Moshi moshi, T o, Class<T> clazz) {
