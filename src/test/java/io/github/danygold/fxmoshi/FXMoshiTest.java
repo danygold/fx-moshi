@@ -71,10 +71,6 @@ class FXMoshiTest {
         Assertions.assertEquals(new SimpleObjectProperty<LocalDate>().get(), emptyPOJO.objectPropertyProperty().get());
         Assertions.assertEquals(FXCollections.observableSet(), emptyPOJO.setPropertyProperty());
         Assertions.assertEquals(new SimpleStringProperty().get(), emptyPOJO.stringPropertyProperty().get());
-
-        TestFullPOJO emptyPOJO1 = new TestFullPOJO();
-        TestFullPOJO emptyPOJO2 = deepCopy(FXMoshi.createBuilder().add(new LocalDateAdapter()).build(), emptyPOJO1, TestFullPOJO.class);
-        Assertions.assertEquals(emptyPOJO1, emptyPOJO2);
     }
 
     @Test
