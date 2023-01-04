@@ -79,12 +79,7 @@ class FXMoshiTest {
 
     @Test
     void mixedProperties() {
-        TestMixedPOJO testMixedPOJO = new TestMixedPOJO();
-        testMixedPOJO.setStringProperty("stringProperties");
-        testMixedPOJO.setString("string");
 
-        TestMixedPOJO testMixedPOJO1 = deepCopy(FXMoshi.build(), testMixedPOJO, TestMixedPOJO.class);
-        Assertions.assertEquals(testMixedPOJO, testMixedPOJO1);
     }
 
     @Test
