@@ -23,7 +23,7 @@ plugins {
 }
 
 group = "io.github.danygold"
-version = "1.0.0"
+version = "1.1.0-SNAPSHOT"
 description = "FX Moshi, a set of Moshi adapters to support serialization/deserialization of JavaFX properties."
 
 java {
