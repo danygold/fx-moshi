@@ -11,7 +11,7 @@ JavaFX properties.
 ## Download
 
 You can manually download the JAR from
-[Maven Central](https://repo1.maven.org/maven2/io/danygold/danygold/fx-moshi/), otherwise you can use a build tool-
+[Maven Central](https://repo1.maven.org/maven2/io/danygold/danygold/fx-moshi/), otherwise you can use a build tool
 
 ### Gradle
 
