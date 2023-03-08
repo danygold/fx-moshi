@@ -17,7 +17,7 @@ plugins {
     id("java-library")
     id("org.openjfx.javafxplugin") version "0.0.13"
     id("maven-publish")
-    id("io.github.gradle-nexus.publish-plugin") version "1.2.0"
+    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     signing
     jacoco
 }
