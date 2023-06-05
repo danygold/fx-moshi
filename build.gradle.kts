@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    api("com.squareup.moshi:moshi:1.14.0")
+    api("com.squareup.moshi:moshi:1.15.0")
     compileOnlyApi("org.jetbrains:annotations:24.0.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
