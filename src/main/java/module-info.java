@@ -1,5 +1,5 @@
 module io.github.danygold.fx.moshi {
-    requires moshi;
+    requires com.squareup.moshi;
     requires transitive javafx.base;
     requires static org.jetbrains.annotations;
 
@@ -9,9 +9,9 @@ module io.github.danygold.fx.moshi {
     exports io.github.danygold.fxmoshi.adapters.observable;
     exports io.github.danygold.fxmoshi.factories;
 
-    opens io.github.danygold.fxmoshi to moshi;
-    opens io.github.danygold.fxmoshi.adapters.properties to moshi;
-    opens io.github.danygold.fxmoshi.adapters.properties.primitives to moshi;
-    opens io.github.danygold.fxmoshi.adapters.observable to moshi;
-    opens io.github.danygold.fxmoshi.factories to moshi;
+    opens io.github.danygold.fxmoshi to com.squareup.moshi;
+    opens io.github.danygold.fxmoshi.adapters.properties to com.squareup.moshi;
+    opens io.github.danygold.fxmoshi.adapters.properties.primitives to com.squareup.moshi;
+    opens io.github.danygold.fxmoshi.adapters.observable to com.squareup.moshi;
+    opens io.github.danygold.fxmoshi.factories to com.squareup.moshi;
 }

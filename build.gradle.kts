@@ -15,9 +15,9 @@
 
 plugins {
     id("java-library")
-    id("org.openjfx.javafxplugin") version "0.0.13"
+    id("org.openjfx.javafxplugin") version "0.0.14"
     id("maven-publish")
-    id("io.github.gradle-nexus.publish-plugin") version "1.2.0"
+    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     signing
     jacoco
 }
@@ -44,11 +44,11 @@ repositories {
 }
 
 dependencies {
-    api("com.squareup.moshi:moshi:1.14.0")
-    compileOnlyApi("org.jetbrains:annotations:24.0.0")
+    api("com.squareup.moshi:moshi:1.15.0")
+    compileOnlyApi("org.jetbrains:annotations:24.0.1")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
 }
 
 tasks.withType<JavaCompile> {
